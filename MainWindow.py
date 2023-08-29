@@ -289,7 +289,6 @@ class Ui_MainWindow(object):
         self.file.addSeparator()
         self.file.addAction(self.exit)
         self.menubar.addAction(self.file.menuAction())
-        self.menubar.addAction(MainWindow.settings)
         self.menubar.addAction(self.about_program.menuAction())
 
         self.retranslateUi(MainWindow)
