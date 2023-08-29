@@ -11,20 +11,20 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.setEnabled(True)
-        MainWindow.resize(568, 250)
+class Ui_AboutProgram(object):
+    def setupUi(self, Application):
+        Application.setObjectName("MainWindow")
+        Application.setEnabled(True)
+        Application.resize(568, 250)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
-        MainWindow.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(Application.sizePolicy().hasHeightForWidth())
+        Application.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(11)
-        MainWindow.setFont(font)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        Application.setFont(font)
+        self.centralwidget = QtWidgets.QWidget(Application)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(100, 70, 391, 31))
@@ -59,10 +59,10 @@ class Ui_MainWindow(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        MainWindow.setCentralWidget(self.centralwidget)
+        Application.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(Application)
+        QtCore.QMetaObject.connectSlotsByName(Application)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

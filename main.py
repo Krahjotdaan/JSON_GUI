@@ -1,4 +1,4 @@
-import os, sys, json
+import sys
 from PyQt5 import QtWidgets
 from Application import *
 
