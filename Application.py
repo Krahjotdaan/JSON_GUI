@@ -9,36 +9,51 @@ class Application(QtWidgets.QMainWindow):
         super(Application, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.db = []
 
     def new_file_click(self):
         pass
 
     def open_file_click(self):
+        self.ui.data_type.isEnabled = False
         file_name = QtWidgets.QFileDialog.getOpenFileName(self, 'Открытие файла', '/home', '*.json')[0]
         with open(file_name, 'r') as fl:
             data = json.load(fl)
+            keys = list(data[0].keys())
+            self.db.append(keys)
             data_array = []
             for x in data:
-                data_array.append([list(x.keys()), list(x.values())])
-        
+                data_array.append(list(x.values()))
+                self.db.append(list(x.values()))
+
             top = QtWidgets.QTreeWidgetItem(self.ui.tree)
             self.ui.tree.addTopLevelItem(top)
             top.setText(0, fl.name)
-            for k in range(len(data_array[0][0])):
+            for i in range(len(keys)):
                 item = QtWidgets.QTreeWidgetItem(top)
-                item.setText(0, data_array[0][0][k])
-                if isinstance(data_array[0][1][k], int) or isinstance(data_array[0][1][k], float):
-                    item.setText(1, "Number")
-                elif isinstance(data_array[0][1][k], str):
-                    item.setText(1, "String")
-                elif isinstance(data_array[0][1][k], dict):
-                    item.setText(1, "Object")
-                elif isinstance(data_array[0][1][k], list):
-                    item.setText(1, "Array")
-                elif isinstance(data_array[0][1][k], bool):
-                    item.setText(1, "Boolean")
-                elif isinstance(data_array[0][1][k], None):
-                    item.setText(1, "Null")
+                item.setText(0, keys[i])
+                if isinstance(data_array[0][i], int) or isinstance(data_array[0][i], float):
+                    item.setText(1, "number")
+                elif isinstance(data_array[0][i], str):
+                    item.setText(1, "string")
+                elif isinstance(data_array[0][i], dict):
+                    item.setText(1, "object")
+                elif isinstance(data_array[0][i], list):
+                    item.setText(1, "array")
+                elif isinstance(data_array[0][i], bool):
+                    item.setText(1, "boolean")
+                elif isinstance(data_array[0][i], None):
+                    item.setText(1, "null")
+            
+            self.ui.table.setColumnCount(len(keys))
+            self.ui.table.setRowCount(len(data_array))
+            self.ui.table.setHorizontalHeaderLabels(keys)
+            row = 0
+            for item in data_array:
+                for i in range(len(data_array)):
+                    for j in range(len(keys)):
+                        self.ui.table.setItem(row, j, QtWidgets.QTableWidgetItem(str(data_array[i][j])))
+                    row += 1
 
     def save_file_click(self):
         pass
