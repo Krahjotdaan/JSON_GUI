@@ -55,6 +55,11 @@ class Application(QtWidgets.QMainWindow):
                         self.ui.table.setItem(row, j, QtWidgets.QTableWidgetItem(str(data_array[i][j])))
                     row += 1
 
+            self.ui.table.cellClicked.connect(self.current_cell)
+
+    def current_cell(self):
+        self.ui.cell_editing.setText(self.ui.table.currentItem().text())
+
     def save_file_click(self):
         pass
 
@@ -88,7 +93,7 @@ class Application(QtWidgets.QMainWindow):
         pass
 
     def apply_button_click(self):
-        pass
+        self.ui.table.currentItem().setText(self.ui.cell_editing.toPlainText())
 
     def goto_button_click(self):
         pass
