@@ -77,6 +77,8 @@ class Application(QtWidgets.QMainWindow):
         try:
             self.ui.cell_editing.setText(self.ui.table.currentItem().text())
             self.ui.key_editing.setText(self.db[0][self.ui.table.currentColumn()])
+            self.ui.entry_number.setText("Запись " + str(self.ui.table.currentRow() + 1) + \
+                                         " из " + str(self.ui.table.rowCount()))
         except AttributeError:
             pass
 
