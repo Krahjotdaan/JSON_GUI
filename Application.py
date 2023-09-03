@@ -115,18 +115,28 @@ class Application(QtWidgets.QMainWindow):
 
     def delete_entry_button_click(self):
         if self.ui.table.currentRow() > -1:
-            self.ui.table.removeRow(self.ui.table.currentRow())
-            self.ui.table.selectionModel().clearCurrentIndex()
-            self.ui.cell_editing.setText(None)
-            self.ui.key_editing.setText(None)
+            result = QtWidgets.QMessageBox.question(self, 
+                                            "Подтверждение", 
+                                            "Вы действительно хотите удалить запись " + str(self.ui.table.currentRow() + 1) + "?",
+                                            QtWidgets.QMessageBox.StandardButton.No | QtWidgets.QMessageBox.StandardButton.Yes)
+            if result == QtWidgets.QMessageBox.StandardButton.Yes:
+                self.ui.table.removeRow(self.ui.table.currentRow())
+                self.ui.table.selectionModel().clearCurrentIndex()
+                self.ui.cell_editing.setText(None)
+                self.ui.key_editing.setText(None)
 
     def delete_col_button_click(self):
         if self.ui.table.currentColumn() > -1:
-            self.db[0].remove(self.db[0][self.ui.table.currentColumn()])
-            self.ui.table.removeColumn(self.ui.table.currentColumn())
-            self.ui.table.selectionModel().clearCurrentIndex()
-            self.ui.cell_editing.setText(None)
-            self.ui.key_editing.setText(None)
+            result = QtWidgets.QMessageBox.question(self, 
+                                            "Подтверждение", 
+                                            "Вы действительно хотите удалить этот ключ и все соответствующие значения?",
+                                            QtWidgets.QMessageBox.StandardButton.No | QtWidgets.QMessageBox.StandardButton.Yes)
+            if result == QtWidgets.QMessageBox.StandardButton.Yes:
+                self.db[0].remove(self.db[0][self.ui.table.currentColumn()])
+                self.ui.table.removeColumn(self.ui.table.currentColumn())
+                self.ui.table.selectionModel().clearCurrentIndex()
+                self.ui.cell_editing.setText(None)
+                self.ui.key_editing.setText(None)
 
     def apply_button_click(self):
         try:
